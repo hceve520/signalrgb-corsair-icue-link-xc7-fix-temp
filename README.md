@@ -8,18 +8,21 @@ This fork maps temperature (and RPM) sensors by **hub channel index**. XC7-only 
 
 Same file name and device `Name()` as stock (`Corsair_ICUE_Link_Hub.js` / `Corsair iCUE LINK Device`), so a custom install **overrides** the built-in plugin for the same VID/PID.
 
-<!-- Replace OWNER/REPO after you create the GitHub repository, then update the button URL. -->
 [![Add To SignalRGB](https://marketplace.signalrgb.com/resources/add-extension-256.png "Add to My SignalRGB Installation")](https://srgbmods.net/s?p=addon/install?url=https://github.com/hceve520/signalrgb-corsair-icue-link-xc7-fix-temp)
+
+## Preview
+
+[![Preview](https://i.imgur.com/QI9zaEf.png)](https://imgur.com/a/cGmJRRf)
 
 ## Install
 
-### One-click (after the repo is on GitHub)
+### One-click
 
 1. Click **Add To SignalRGB**.
 2. Confirm the SignalRGB prompt and restart if asked.
 3. Open the iCUE LINK Hub device — XC7 should expose a temperature sensor.
 
-One-click URL (update if your GitHub path differs):
+One-click URL:
 
 ```text
 https://srgbmods.net/s?p=addon/install?url=https://github.com/hceve520/signalrgb-corsair-icue-link-xc7-fix-temp
