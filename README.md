@@ -4,7 +4,7 @@ Drop-in replacement for SignalRGB’s built-in **Corsair iCUE LINK Hub** plugin.
 
 **Fixes:** LINK XC7 RGB Elite cold-plate temperature not showing (stock plugin sets `probe: false` and binds temps via a shared shift pool).
 
-This fork maps temperature (and RPM) sensors by **hub channel index**, matching [FanControl.CorsairLink](https://github.com/EvanMulawski/FanControl.CorsairLink) iCUE LINK logic. XC7-only setups (no fans) can still register and poll temperature.
+This fork maps temperature (and RPM) sensors by **hub channel index**. XC7-only setups (no fans) can still register and poll temperature.
 
 Same file name and device `Name()` as stock (`Corsair_ICUE_Link_Hub.js` / `Corsair iCUE LINK Device`), so a custom install **overrides** the built-in plugin for the same VID/PID.
 
@@ -53,7 +53,6 @@ User plugins in Documents override AppData built-ins with the same VendorId + Pr
 ## Credits
 
 - Base plugin: SignalRGB / WhirlwindFX `Corsair_ICUE_Link_Hub.js`
-- Channel/temp protocol reference: [EvanMulawski/FanControl.CorsairLink](https://github.com/EvanMulawski/FanControl.CorsairLink)
 
 ## License
 

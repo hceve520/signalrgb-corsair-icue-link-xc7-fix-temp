@@ -1,8 +1,7 @@
 import {ContextError, globalContext, Assert} from "@SignalRGB/Errors.js";
 /**
  * Community fix for LINK XC7 RGB Elite cold-plate temperature not appearing in SignalRGB.
- * Temp/RPM sensors are bound by hub channel index (FanControl.CorsairLink style)
- * instead of the stock shared probe-pool shift().
+ * Temp/RPM sensors are bound by hub channel index instead of the stock shared probe-pool shift().
  *
  * Install as a custom user plugin (Documents\WhirlwindFX\Plugins) so it overrides
  * the built-in Corsair_ICUE_Link_Hub.js for the same VID/PID.
@@ -247,7 +246,7 @@ function createSensors() {
 		}
 	}
 
-	// FanControl-style: temp-only devices (XC7) are valid; do not require fans
+	// Temp-only devices (XC7) are valid; do not require fans
 	if(deviceFanArray.length > 0 || deviceTempSensorArray.length > 0) {
 		return true;
 	}
@@ -257,7 +256,7 @@ function createSensors() {
 
 /**
  * Read hub temperature slots.
- * Index in the returned arrays equals hub channel (FanControl.CorsairLink convention).
+ * Index in the returned arrays equals hub channel.
  * Unavailable slots are omitted from the valid lists but keep their channel index.
  * @returns {[number[], number[]]} [temperatures, channelIndexes]
  */
@@ -330,16 +329,14 @@ let hasComponentChannel = false;
 function fetchLinkDevices() {
 	// Read two packets for people with more devices (FW >= 2.5).
 	const childDevicePacket = Corsair.ReadFromEndpointMultiple(0, 0x36, 2, 0x01);
-	// Rip out header from packet 2 (FanControl continuation Slice(4) equivalent at merge point).
+	// Rip out header from packet 2.
 	childDevicePacket.splice(513, 4);
 
 	const childDeviceArray = [];
 
 	device.log(`Child Device Packet ${childDevicePacket}`, {toFile : true});
 
-	// FanControl.CorsairLink LinkHubDataReader.GetDevices:
-	// after 6-byte HID/Bragi header, byte[0] = lastChannel; slots start at channel 1.
-	// SignalRGB ReadFromEndpoint is +1 vs FanControl Payload → lastChannel at [7].
+	// After HID/Bragi header, lastChannel is at [7]; device slots start at channel 1.
 	const lastChannel = childDevicePacket[7] ?? 0;
 	device.log(`Hub lastChannel=${lastChannel} (channel-based parse)`, {toFile : true});
 
@@ -538,7 +535,7 @@ function addChildDevice(childDevice, uniqueId, fanArray, probeArray) {
 
 	device.log(`Unique ID: ${uniqueId}`, {toFile : true});
 
-	// FanControl.CorsairLink: temp/RPM sensor index == hub channel (not a shared shift pool).
+	// Temp/RPM sensor index == hub channel (not a shared shift pool).
 	const hubChannel = Number.isInteger(childDevice.channel) ? childDevice.channel : -1;
 	const ProbeID	= deviceConfig.probe === true ? hubChannel : -1;
 	const RPMID		= deviceConfig.rpm === true ? hubChannel : -1;
@@ -1208,7 +1205,7 @@ class CorsairLibrary{
 				],
 				size: [17, 17],
 				image: "https://assets.signalrgb.com/devices/brands/corsair/misc/link-xc7.png",
-				// FanControl.CorsairLink: WaterBlockXc7Series ReportsTemperature only
+				// XC7 reports cold-plate temperature only (no RPM)
 				probe: true,
 				rpm: false,
 			},
@@ -2666,7 +2663,7 @@ export class ModernCorsairProtocol{
 	/**
 	 * Read temperatures from endpoint 0x21.
 	 * Returns an array indexed by hub channel; Unavailable slots are null.
-	 * Status byte: 0x00 = Available, 0x01 = Unavailable (FanControl.CorsairLink).
+	 * Status byte: 0x00 = Available, 0x01 = Unavailable.
 	 */
 	FetchTemperatures(deviceID = 0, firstRun = false) {
 		device.pause(1);
@@ -2959,7 +2956,7 @@ class StatePollTempProbes extends State{
 			return;
 		}
 
-		// Read Temperature Probes — sensorId is hub channel (FanControl mapping)
+		// Read Temperature Probes — sensorId is hub channel
 		const Temperatures = fetchTempSensorsByChannel();
 
 		for(let i = 0; i < deviceTempSensorArray.length; i++) {
