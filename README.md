@@ -6,7 +6,7 @@ Drop-in replacement for SignalRGB’s built-in **Corsair iCUE LINK Hub** plugin.
 
 This fork maps temperature (and RPM) sensors by **hub channel index**. XC7-only setups (no fans) can still register and poll temperature.
 
-Same file name and device `Name()` as stock (`Corsair_ICUE_Link_Hub.js` / `Corsair iCUE LINK Device`), so a custom install **overrides** the built-in plugin for the same VID/PID.
+Plugin file: `Corsair_ICUE_Link_Hub_Fix_Temp.js`. Device `Name()` matches stock (`Corsair iCUE LINK Device`), so a custom install **overrides** the built-in plugin for the same VID/PID.
 
 [![Add To SignalRGB](https://marketplace.signalrgb.com/resources/add-extension-256.png "Add to My SignalRGB Installation")](https://srgbmods.net/s?p=addon/install?url=https://github.com/hceve520/signalrgb-corsair-icue-link-xc7-fix-temp)
 
@@ -30,7 +30,7 @@ https://srgbmods.net/s?p=addon/install?url=https://github.com/hceve520/signalrgb
 
 ### Manual
 
-1. Copy `Corsair_ICUE_Link_Hub.js` to:
+1. Copy `Corsair_ICUE_Link_Hub_Fix_Temp.js` to:
 
    `%userprofile%\Documents\WhirlwindFX\Plugins\`
 
