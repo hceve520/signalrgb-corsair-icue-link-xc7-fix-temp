@@ -6,7 +6,7 @@ import {ContextError, globalContext, Assert} from "@SignalRGB/Errors.js";
  * Install as a custom user plugin (Documents\WhirlwindFX\Plugins) so it overrides
  * the built-in Corsair_ICUE_Link_Hub.js for the same VID/PID.
  */
-export function Name() { return "Corsair iCUE LINK Device Fix"; }
+export function Name() { return "Corsair iCUE LINK Device"; }
 export function VendorId() { return 0x1b1c; }
 export function ProductId() { return Object.keys(CorsairLibrary.ProductIDList()); }
 export function Publisher() { return "WhirlwindFX"; }
