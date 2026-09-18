@@ -64,3 +64,4 @@ MIT
 ## Disclaimer
 
 Not affiliated with Corsair, WhirlwindFX, or SignalRGB. Use at your own risk. Community override of a built-in plugin may miss future stock updates until you remove the custom file.
+
